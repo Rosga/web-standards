@@ -2,11 +2,14 @@ const handler = require('serve-handler');
 const http = require('http');
 const fs = require('fs');
 
+const distFolderPath = './app/dist';
+const structureFilePath = distFolderPath + '/.structure.json';
 
 console.log('create server');
 const folders = fs.readdirSync('./app').filter(folder => fs.existsSync('./app/' + folder + '/index.html'));
 console.log('folders: ', folders);
-fs.writeFileSync('./app/.structure.json', JSON.stringify(folders));
+fs.mkdirSync(distFolderPath, { recursive: true });
+fs.writeFileSync(structureFilePath, JSON.stringify(folders));
 const server = http.createServer((request, response) => {
 
 
@@ -23,7 +26,7 @@ server.listen(3000, () => {
 
 server.once('close', () => {
     console.log('remove structure json');
-    fs.rmSync('./app/.structure.json');
+    fs.rmSync(structureFilePath);
 });
 
 process.on('SIGINT', function() {
