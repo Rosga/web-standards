@@ -1,0 +1,11 @@
+.progress {
+    height: 5px;
+    background: blue;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    /* Start the scale transform from the left edge */
+    transform-origin: left;
+}
