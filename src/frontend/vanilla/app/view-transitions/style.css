@@ -1,0 +1,86 @@
+/* Only layout and visual styles because the default ViewTransition is a cross-fade out-of-the-box */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    background: black;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+p {
+    margin-bottom: 0.5em;
+}
+
+.gallery {
+    display: flex;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 0.5em;
+    list-style: none;
+}
+
+.thumbnail {
+    width: calc((330px - 1.5em) / 4);
+    border-radius: 4px;
+}
+
+figure {
+    position: relative;
+}
+
+.main-image {
+    border-radius: 6px;
+    max-width: 20rem;
+}
+
+@supports not (view-transition-name: dinosaur) {
+    main::after {
+        content: "Unfortunately, the brower you're using right now does not support the View Transitions API yet. Maybe try Chrome Canary.";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        text-align: center;
+        padding: 0.5em;
+        background: pink;
+    }
+}
+
+::view-transition-old(main-image),
+::view-transition-new(main-image) {
+    transform-origin: 100% var(--originY, 50%);
+}
+
+::view-transition-new(main-image) {
+    animation: 400ms ease-out both grow;
+}
+
+figure {
+    /* view-transition-name: main-image; */
+}
+
+@keyframes grow {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
