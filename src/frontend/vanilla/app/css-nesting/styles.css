@@ -1,0 +1,39 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.card {
+    border: 2px solid red;
+    padding: 1rem;
+
+    &:hover {
+        box-shadow: 1px 1px 0 0 #666;
+    }
+
+    h2 {
+        font-family: Jolly;
+        font-size: 3rem;
+    }
+
+    .card-body {
+        p {
+            color: #333;
+        }
+    }
+
+    .list & {
+        border-color: green;
+    }
+
+    .list &+& {
+        margin-left: 2em;
+    }
+
+    @media (min-width: 50rem) {
+        & {
+            background-color: lightgoldenrodyellow;
+        }
+    }
+}
