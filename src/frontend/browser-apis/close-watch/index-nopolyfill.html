@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CloseWatcher demo</title>
+
+<style>
+#sidebar {
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #eee;
+  transform: translate(-200px, 0);
+  transition: transform 1s;
+}
+
+#sidebar.open {
+  transform: translate(0, 0);
+}
+
+#error-console {
+  font-family: monospace;
+  white-space: pre;
+  color: #600;
+}
+</style>
+
+<p>This page uses the <code><a href="https://html.spec.whatwg.org/multipage/interaction.html#the-closewatcher-interface">CloseWatcher</a></code> API to allow closing the sidebar when you use the <kbd>Esc</kbd> key, or Android back button/gesture.
+
+<p>Use Chrome 120+ or later.
+
+<p><a href="https://glitch.com/edit/#!/close-watcher-demo">Demo source on Glitch</a>
+
+<hr>
+
+<button id="open">Open sidebar</button>
+
+<hr>
+
+<div id="sidebar">
+  <ul>
+    <li>Some
+    <li>Sidebar
+    <li>Stuff
+  </ul>
+  
+  <p>Use <kbd>Esc</kbd> or Android back button/gesture to close me!</p>
+  
+  <p>
+    Perhaps you would like to try typing some text into this field to test <a href="https://github.com/WICG/close-watcher/issues/29">the <kbd>Esc</kbd> key interaction with IMEs?</a>
+  </p>
+  
+  <label>
+    A no-op text field
+    <input type="search">
+  </label>
+</div>
+
+<script type="module">
+document.querySelector("#open").addEventListener("click", () => {
+  document.querySelector("#sidebar").classList.add("open");
+  
+  const watcher = new CloseWatcher();
+
+  watcher.addEventListener("cancel", () => {
+    console.log("CloseWatcher cancel event");
+  });
+  watcher.addEventListener("close", () => {
+    document.querySelector("#sidebar").classList.remove("open");
+  });
+});
+</script>
