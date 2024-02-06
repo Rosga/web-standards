@@ -1,0 +1,15 @@
+{
+  "name": "close-watch",
+  "version": "1.0.0",
+  "description": "## Working demo from: - https://glitch.com/edit/#!/close-watcher-demo?path=index-nopolyfill.html%3A14%3A16",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
